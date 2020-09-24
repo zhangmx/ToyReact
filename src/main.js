@@ -1,14 +1,8 @@
 import {createElement, render,Component} from "./toy-react.js"
 
 class MyComponent extends Component{
-    constructor(){
-
-    }
-
-    setAttribute(name,value){
-
-    }
-    appendChild(){
+    render(){
+        return <div>yyy</div>
 
     }
 }
