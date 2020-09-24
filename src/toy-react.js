@@ -1,41 +1,41 @@
-class ElementWrapper{
-    constructor(type){
+class ElementWrapper {
+    constructor(type) {
         this.root = document.createElement(type);
     }
 
-    setAttribute(name,value){
-        this.root.setAttribute(name,value);
+    setAttribute(name, value) {
+        this.root.setAttribute(name, value);
     }
-    appendChild(component){
+    appendChild(component) {
         this.root.appendChild(component.root)
     }
 
 }
 
 class TextWrapper {
-    constructor(content){
+    constructor(content) {
         this.root = document.createTextNode(content);
     }
 }
 
 export class Component {
-    constructor(content){
+    constructor(content) {
         this.props = Object.create(null);
         this.children = [];
         this._root = null;
     }
 
-    setAttribute(name,value){
+    setAttribute(name, value) {
         this.props[name] = value;
     }
 
-    appendChild(component){
+    appendChild(component) {
         this.children.push(component);
     }
 
-    get root(){
-        if(!this._root) {
-            this._root =this.render().root;
+    get root() {
+        if (!this._root) {
+            this._root = this.render().root;
         }
         return this._root;
     }
@@ -54,17 +54,27 @@ export function createElement(tagName, attributes, ...children) {
         e.setAttribute(p, attributes[p]);
     }
 
-    for (let child of children) {
-        if (typeof child === "string") {
-            child = new TextWrapper(child);
+    let insertChildren = (children) => {
+        for (let child of children) {
+            if (typeof child === "string") {
+                child = new TextWrapper(child);
+            }
+            if (typeof child === "object" && child instanceof Array) {
+                insertChildren(child)
+            } else {
+                e.appendChild(child);
+            }
+
         }
-        e.appendChild(child);
     }
+
+    insertChildren(children);
+
 
     return e;
 }
 
 // component
-export function render(element,parentElement) {
+export function render(element, parentElement) {
     parentElement.appendChild(element.root);
 }
