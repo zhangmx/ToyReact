@@ -1,10 +1,19 @@
-import {createElement} from "./toy-react.js"
+import {createElement, render,Component} from "./toy-react.js"
 
-class MyComponent {
+class MyComponent extends Component{
+    constructor(){
 
+    }
+
+    setAttribute(name,value){
+
+    }
+    appendChild(){
+
+    }
 }
 
-document.body.appendChild(
+render(
     <div id="test" className="good">
         <div>
             <div>
@@ -14,4 +23,4 @@ document.body.appendChild(
         </div>
         <MyComponent></MyComponent>
     </div>
-);
+,document.body);

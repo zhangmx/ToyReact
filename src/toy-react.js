@@ -1,3 +1,41 @@
+class ElementWrapper{
+    constructor(type){
+
+    }
+
+    setAttribute(name,value){
+
+    }
+    appendChild(){
+
+    }
+
+}
+
+class TextWrapper {
+    constructor(content){
+
+    }
+
+    appendChild(){
+
+    }
+}
+
+class Component {
+    constructor(content){
+
+    }
+
+    setAttribute(name,value){
+        
+    }
+
+    appendChild(){
+
+    }
+}
+
 
 export function createElement(tagName, attributes, ...children) {
     let e;
@@ -19,4 +57,9 @@ export function createElement(tagName, attributes, ...children) {
     }
 
     return e;
+}
+
+// component
+export function render(element,parentElement) {
+
 }
