@@ -1,5 +1,8 @@
 const RENDER_TO_DOM = Symbol("render to dom");
 
+//https://codepen.io/gaearon/pen/VbbVLg 中間階段
+
+// https://codepen.io/gaearon/pen/gWWZgR 最終階段
 
 class ElementWrapper {
     constructor(type) {
