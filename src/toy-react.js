@@ -19,7 +19,7 @@ class TextWrapper {
 }
 
 export class Component {
-    constructor(content) {
+    constructor() {
         this.props = Object.create(null);
         this.children = [];
         this._root = null;
@@ -60,7 +60,7 @@ export function createElement(tagName, attributes, ...children) {
                 child = new TextWrapper(child);
             }
             if (typeof child === "object" && child instanceof Array) {
-                insertChildren(child)
+                insertChildren(child);
             } else {
                 e.appendChild(child);
             }
@@ -69,7 +69,6 @@ export function createElement(tagName, attributes, ...children) {
     }
 
     insertChildren(children);
-
 
     return e;
 }
