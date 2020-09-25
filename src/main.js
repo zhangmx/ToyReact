@@ -12,9 +12,9 @@ class MyComponent extends Component{
     render(){
         return <div>
             <h1>yyyy</h1>
-            <div>{this.state.a}xxxxx{this.state.b}</div>
+            <div>{this.state.a.toString()}xxxxx{this.state.b.toString()}</div>
             {this.children}
-        </div>
+        </div>;
 
     }
 }
