@@ -65,6 +65,27 @@ export class Component {
         this[RENDER_TO_DOM](this._range)
     }
 
+    setState(newState) {
+        if (this.state === null || typeof this.state !== "object") {
+            this.state = newState;
+            this.rerender();
+            return;
+        }
+
+        let merge = (oldState,newState)=> {
+            for (let p in newState) {
+                // js 判斷 對象爲空的坑
+                if (oldState[p] === null || typeof oldState[p] !== "object") {
+                    oldState [p]= newState[p];
+                } else {
+                    merge(oldState[p],newState[p]);
+                }
+            }
+        };
+        merge(this.state, newState)
+        this.rerender();
+    }
+
 }
 
 
