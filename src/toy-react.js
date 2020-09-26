@@ -73,8 +73,8 @@ export class Component {
                 let newChild = newChildren[i]
                 let oldChild = oldChildren[i]
 
-                if (i < oldChildren.length){
-                    update(oldChild,newChild)
+                if (i < oldChildren.length) {
+                    update(oldChild, newChild)
                 } else {
 
                 }
@@ -165,7 +165,6 @@ class ElementWrapper extends Component {
 
     [RENDER_TO_DOM](range) {
         this._range = range
-        range.deleteContents();
 
         let root = document.createElement(this.type)
 
@@ -192,7 +191,7 @@ class ElementWrapper extends Component {
             child[RENDER_TO_DOM](childRange);
         }
 
-        range.insertNode(root);
+        replaceContent(range, root)
     }
 }
 
@@ -201,7 +200,6 @@ class TextWrapper extends Component {
         super(content)
         this.type = "#text";
         this.content = content;
-        this.root = document.createTextNode(content);
     }
 
     get vdom() {
@@ -210,11 +208,22 @@ class TextWrapper extends Component {
 
     [RENDER_TO_DOM](range) {
         this._range = range
-        range.deleteContents();
-        range.insertNode(this.root)
 
+        let root = document.createTextNode(this.content);
+        replaceContent(range, root)
     }
 }
+
+function replaceContent(range, node) {
+    range.insertNode(node);
+    range.setStartAfter(node);
+    range.deleteContents();
+
+    range.setStartBefore(node);
+    range.setEndAfter(node);
+}
+
+
 
 export function createElement(tagName, attributes, ...children) {
     let e;
